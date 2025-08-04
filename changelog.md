@@ -1,4 +1,3 @@
-# 1.6.32
+# 1.7.0
 ## Changelog:
-- Fix dropdown
-- Fix some bugs
+- Major UI redesign
