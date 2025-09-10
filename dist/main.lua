@@ -7501,9 +7501,11 @@ ad.Themes = ac
 local b = game:GetService("Players") and game:GetService("Players").LocalPlayer or nil
 aa.Themes = ac
 
-local e = protectgui or (syn and syn.protect_gui) or function() end
+local e = not shared.ForcePlayerGui and protectgui or (syn and syn.protect_gui) or function() end
 
 local g = shared.ForcePlayerGui and b:WaitForChild("PlayerGui") or gethui and gethui() or game.CoreGui
+
+warn("WINDUI LOADING: "..tostring(g))
 
 aa.ScreenGui = ae("ScreenGui", {
 	Name = "WindUI",
