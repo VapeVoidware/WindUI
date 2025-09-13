@@ -9786,7 +9786,7 @@ game:GetService("Players") and game:GetService("Players").LocalPlayer or nil
 
 local an = not shared.ForcePlayerGui and protectgui or (syn and syn.protect_gui) or function() end
 
-local ao = shared.ForcePlayerGui and b:WaitForChild("PlayerGui") or gethui and gethui() or game.CoreGui
+local ao = shared.ForcePlayerGui and am:WaitForChild("PlayerGui") or gethui and gethui() or game.CoreGui
 
 aa.ScreenGui = aj("ScreenGui", {
 	Name = "WindUI",
