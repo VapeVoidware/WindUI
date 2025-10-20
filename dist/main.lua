@@ -15,6 +15,44 @@
     License: MIT
 ]]
 
+local cloneref = (cloneref or clonereference or function(instance: any)
+    return instance
+end)
+
+if not shared.VoidwareInkGame then
+	cloneref = function(instance: any)
+		return instance
+	end
+end
+
+local CoreGui; pcall(function()
+	CoreGui = cloneref(game:GetService("CoreGui"))
+end)
+local Players: Players = cloneref(game:GetService("Players"))
+local RunService: RunService = cloneref(game:GetService("RunService"))
+local UserInputService: UserInputService = cloneref(game:GetService("UserInputService"))
+local TweenService: TweenService = cloneref(game:GetService("TweenService"))
+local TextService: TextService = cloneref(game:GetService("TextService"))
+local Workspace: Workspace = cloneref(game:GetService("Workspace"))
+local SoundService: SoundService = cloneref(game:GetService("SoundService"))
+local Teams: Teams = cloneref(game:GetService("Teams"))
+local TouchInputService: TouchInputService = cloneref(game:GetService("TouchInputService"))
+local LocalizationService: LocalizationService = cloneref(game:GetService("LocalizationService"))
+local HttpService: HttpService = cloneref(game:GetService("HttpService"))
+local Lighting: Lighting = cloneref(game:GetService("Lighting"))
+
+local LocalPlayer = Players.LocalPlayer or Players.PlayerAdded:Wait()
+local Mouse = cloneref(LocalPlayer:GetMouse())
+
+local getgenv = getgenv or function()
+    return shared
+end
+local setclipboard = setclipboard or nil
+local protectgui = protectgui or (syn and syn.protect_gui) or function() end
+local gethui = gethui or function()
+    return CoreGui
+end
+
 local a
 a = {
 	cache = {},
@@ -27,12 +65,12 @@ a = {
 }
 do
 	function a.a()
-		local b = game:GetService("RunService")
+		local b = RunService
 		local d = b.Heartbeat
-		local e = game:GetService("UserInputService")
-		local f = game:GetService("TweenService")
-		local g = game:GetService("LocalizationService")
-		local h = game:GetService("HttpService")
+		local e = UserInputService
+		local f = TweenService
+		local g = LocalizationService
+		local h = HttpService
 
 		local i = "https://raw.githubusercontent.com/Footagesus/Icons/main/Main-v2.lua"
 
@@ -1460,7 +1498,7 @@ do
 				math.random,
 				math.floor,
 				gethwid or function()
-					return game:GetService("Players").LocalPlayer.UserId
+					return LocalPlayer.UserId
 				end
 			local as, at = "", 0
 
@@ -1703,7 +1741,7 @@ do
 
 		function ab.New(ac)
 			local ad = gethwid or function()
-				return game:GetService("Players").LocalPlayer.UserId
+				return LocalPlayer.UserId
 			end
 			local ae, af = request or http_request or syn_request, setclipboard or toclipboard
 
@@ -2731,23 +2769,23 @@ do
 		end
 
 		local function viewportPointToWorld(aa, ab)
-			local ac = game:GetService("Workspace").CurrentCamera:ScreenPointToRay(aa.X, aa.Y)
+			local ac = Workspace.CurrentCamera:ScreenPointToRay(aa.X, aa.Y)
 			return ac.Origin + ac.Direction * ab
 		end
 
 		local function getOffset()
-			local aa = game:GetService("Workspace").CurrentCamera.ViewportSize.Y
+			local aa = Workspace.CurrentCamera.ViewportSize.Y
 			return map(aa, 0, 2560, 8, 56)
 		end
 
 		return { viewportPointToWorld, getOffset }
 	end
 	function a.n()
-		local aa = a.load("a")
+		--[[local aa = a.load("a")
 		local ab = aa.New
 
 		local ac, ad = unpack(a.load("m"))
-		local ae = Instance.new("Folder", game:GetService("Workspace").CurrentCamera)
+		local ae = Instance.new("Folder", Workspace.CurrentCamera)
 
 		local function createAcrylic()
 			local af = ab("Part", {
@@ -2789,7 +2827,7 @@ do
 			end
 
 			local function render()
-				local aj = game:GetService("Workspace").CurrentCamera
+				local aj = Workspace.CurrentCamera
 				if aj then
 					aj = aj.CFrame
 				end
@@ -2824,7 +2862,7 @@ do
 			end
 
 			local function renderOnChange()
-				local aj = game:GetService("Workspace").CurrentCamera
+				local aj = Workspace.CurrentCamera
 				if not aj then
 					return
 				end
@@ -2879,7 +2917,7 @@ do
 			ag.Model = ai
 
 			return ag
-		end
+		end--]]
 	end
 	function a.o()
 		local aa = a.load("a")
@@ -2990,7 +3028,7 @@ do
 				for ad, ae in pairs(ac) do
 					ae.Enabled = false
 				end
-				ab.Parent = game:GetService("Lighting")
+				ab.Parent = nil --Lighting
 			end
 
 			function aa.Disable()
@@ -3007,12 +3045,12 @@ do
 					end
 				end
 
-				for ad, ae in pairs(game:GetService("Lighting"):GetChildren()) do
+				for ad, ae in pairs(Lighting:GetChildren()) do
 					register(ae)
 				end
 
-				if game:GetService("Workspace").CurrentCamera then
-					for af, ag in pairs(game:GetService("Workspace").CurrentCamera:GetChildren()) do
+				if Workspace.CurrentCamera then
+					for af, ag in pairs(Workspace.CurrentCamera:GetChildren()) do
 						register(ag)
 					end
 				end
@@ -3539,7 +3577,7 @@ do
 	function a.t()
 		local aa = {}
 
-		local ab = game:GetService("UserInputService")
+		local ab = UserInputService
 
 		local ac = a.load("a")
 		local ad = ac.New
@@ -4125,8 +4163,6 @@ do
 		local ac = ab.New
 		local ad = ab.Tween
 
-		game:GetService("UserInputService")
-
 		function aa.New(ae)
 			local af = {
 				Button = nil,
@@ -4485,8 +4521,6 @@ do
 		local ab = aa.New
 		local ac = aa.NewRoundFrame
 		local ad = aa.Tween
-
-		game:GetService("UserInputService")
 
 		local function Color3ToHSB(ae)
 			local af, ag, ah = ae.R, ae.G, ae.B
@@ -5684,9 +5718,9 @@ do
 							aj = (au.UserInputType == Enum.UserInputType.Touch)
 							ar.ScrollingEnabled = false
 							af = true
-							ak = game:GetService("RunService").RenderStepped:Connect(function()
+							ak = RunService.RenderStepped:Connect(function()
 								local aw = aj and au.Position.X
-									or game:GetService("UserInputService"):GetMouseLocation().X
+									or UserInputService:GetMouseLocation().X
 								local ax = math.clamp(
 									(aw - ai.UIElements.SliderIcon.AbsolutePosition.X)
 										/ ai.UIElements.SliderIcon.AbsoluteSize.X,
@@ -5703,7 +5737,7 @@ do
 									aa.SafeCallback(ai.Callback, FormatValue(at))
 								end
 							end)
-							al = game:GetService("UserInputService").InputEnded:Connect(function(aw)
+							al = UserInputService.InputEnded:Connect(function(aw)
 								if
 									(
 										aw.UserInputType == Enum.UserInputType.MouseButton1
@@ -5787,7 +5821,7 @@ do
 		return ae
 	end
 	function a.F()
-		local aa = game:GetService("UserInputService")
+		local aa = UserInputService
 
 		local ac = a.load("a")
 		local ad = ac.New
@@ -5812,6 +5846,9 @@ do
 				Picking = false,
 				UIElements = {},
 			}
+			if shared.KEYBIND_FRAME_WIND_UI_ADD_KEYBIND_FUNCTION then
+				pcall(shared.KEYBIND_FRAME_WIND_UI_ADD_KEYBIND_FUNCTION, aj.Title, aj.Value, aj.Callback)
+			end
 
 			local ak = true
 
@@ -6024,9 +6061,9 @@ do
 	function a.H()
 		local aa = {}
 
-		local ac = game:GetService("UserInputService")
-		local ae = game:GetService("Players").LocalPlayer:GetMouse()
-		local af = game:GetService("Workspace").CurrentCamera
+		local ac = UserInputService
+		local ae = Mouse
+		local af = Workspace.CurrentCamera
 
 		local ag = workspace.CurrentCamera
 
@@ -6469,9 +6506,7 @@ do
 		return aa
 	end
 	function a.I()
-		game:GetService("UserInputService")
-		game:GetService("Players").LocalPlayer:GetMouse()
-		local aa = game:GetService("Workspace").CurrentCamera
+		local aa = Workspace.CurrentCamera
 
 		local ac = a.load("a")
 		local ae = ac.New
@@ -7081,14 +7116,13 @@ workspace.CurrentCamera
 		local ae = ac.New
 		local ag = ac.Tween
 
-		local ai = game:GetService("UserInputService")
-		game:GetService("TouchInputService")
-		local aj = game:GetService("RunService")
-		local ak = game:GetService("Players")
+		local ai = UserInputService
+		local aj = RunService
+		local ak = Players
 
 		local al = aj.RenderStepped
 		local am = ak.LocalPlayer
-		local an = am:GetMouse()
+		local an = cloneref(am:GetMouse())
 
 		local ao = a.load("i").New
 		local ap = a.load("j").New
@@ -8182,8 +8216,7 @@ as, at = ap:New(ar)
 		}
 	end
 	function a.S()
-		game:GetService("UserInputService")
-		local ac = game.Players.LocalPlayer:GetMouse()
+		local ac = Mouse
 
 		local ae = a.load("a")
 		local ag = ae.New
@@ -8817,8 +8850,6 @@ as, at = ap:New(ar)
 		}
 	end
 	function a.V()
-		game:GetService("UserInputService")
-
 		local ac = {
 			Margin = 8,
 			Padding = 9,
@@ -9332,8 +9363,7 @@ as, at = ap:New(ar)
 		return ac
 	end
 	function a.W()
-		local ac = game:GetService("UserInputService")
-		game:GetService("RunService")
+		local ac = UserInputService
 
 		local ae = workspace.CurrentCamera
 
@@ -9595,8 +9625,8 @@ as, at = ap:New(ar)
 			local ay
 			if aq.User then
 				local function GetUserThumb()
-					local az, aA = game:GetService("Players"):GetUserThumbnailAsync(
-						aq.User.Anonymous and 1 or game.Players.LocalPlayer.UserId,
+					local az, aA = Players:GetUserThumbnailAsync(
+						aq.User.Anonymous and 1 or LocalPlayer.UserId,
 						Enum.ThumbnailType.HeadShot,
 						Enum.ThumbnailSize.Size420x420
 					)
@@ -10162,6 +10192,283 @@ as, at = ap:New(ar)
 					aq.OpenButtonMain:SetIcon(aq.Icon)
 				end
 			end)
+
+			--[[aq.KeybindFrame = ag.New("Frame", {
+				AnchorPoint = Vector2.new(0.1, 0.5),
+				Position = UDim2.new(0.1, 0, 0.5, 0),
+				Size = UDim2.new(0, 300, 0, 200),
+				BackgroundTransparency = 1,
+				Visible = false,
+				Parent = aq.UIElements.Main,
+			}, {
+				ag.NewRoundFrame(aq.UICorner, "Squircle", {
+					Size = UDim2.new(1, 0, 1, 0),
+					ThemeTag = {
+						ImageColor3 = "Background",
+					},
+				}, {
+					ag.New("UICorner", {
+						CornerRadius = UDim.new(0, aq.UICorner),
+					}),
+				}),
+				ag.New("UIListLayout", {
+					Padding = UDim.new(0, aq.UIPadding),
+					SortOrder = "LayoutOrder",
+					VerticalAlignment = "Top",
+				}),
+				ag.New("UIPadding", {
+					PaddingTop = UDim.new(0, aq.UIPadding),
+					PaddingLeft = UDim.new(0, aq.UIPadding),
+					PaddingRight = UDim.new(0, aq.UIPadding),
+					PaddingBottom = UDim.new(0, aq.UIPadding),
+				}),
+			})
+			
+			local keybindHeader = ag.New("Frame", {
+				Size = UDim2.new(1, 0, 0, 40),
+				BackgroundTransparency = 1,
+				Parent = aq.KeybindFrame,
+			}, {
+				ag.New("TextLabel", {
+					Size = UDim2.new(1, 0, 1, 0),
+					Text = "Keybinds",
+					TextXAlignment = "Left",
+					FontFace = Font.new(ag.Font, Enum.FontWeight.SemiBold),
+					TextSize = 16,
+					BackgroundTransparency = 1,
+					ThemeTag = {
+						TextColor3 = "Text",
+					},
+				}),
+				ag.New("TextButton", {
+					Size = UDim2.new(0, 20, 0, 20),
+					Position = UDim2.new(1, -aq.UIPadding, 0, aq.UIPadding),
+					AnchorPoint = Vector2.new(1, 0),
+					BackgroundTransparency = 1,
+					Text = "",
+					ThemeTag = {
+						TextColor3 = "Text",
+					},
+				}, {
+					ag.Image("x", "close", 0, aq.Folder, "KeybindClose", true),
+				}),
+			})
+			
+			ag.AddSignal(keybindHeader.TextButton.MouseButton1Click, function()
+				aq.KeybindFrame.Visible = false
+			end)
+			
+			aq.KeybindContainer = ag.New("ScrollingFrame", {
+				Size = UDim2.new(1, 0, 1, -40),
+				Position = UDim2.new(0, 0, 0, 40),
+				BackgroundTransparency = 1,
+				ScrollBarThickness = 4,
+				ScrollBarImageColor3 = Color3.fromRGB(0, 0, 0),
+				CanvasSize = UDim2.new(0, 0, 0, 0),
+				AutomaticCanvasSize = "Y",
+				Parent = aq.KeybindFrame,
+			}, {
+				ag.New("UIListLayout", {
+					Padding = UDim.new(0, aq.UIPadding / 2),
+					SortOrder = "LayoutOrder",
+				}),
+			})
+
+			aq.KeybindDrag = ag.Drag(aq.KeybindFrame, {keybindHeader}, nil)
+			
+			aq:CreateTopbarButton("Keybinds", "key", function()
+				aq.KeybindFrame.Visible = not aq.KeybindFrame.Visible
+			end, 996)
+			
+			function aq:AddKeybind(name, keybind, callback)
+				local keybindItem = ag.New("Frame", {
+					Size = UDim2.new(1, 0, 0, 30),
+					BackgroundTransparency = 1,
+					LayoutOrder = #aq.KeybindContainer:GetChildren(),
+					Parent = aq.KeybindContainer,
+				}, {
+					ag.New("TextLabel", {
+						Size = UDim2.new(1, -60, 1, 0),
+						BackgroundTransparency = 1,
+						Text = name,
+						TextXAlignment = "Left",
+						TextSize = 14,
+						FontFace = Font.new(ag.Font, Enum.FontWeight.Medium),
+						ThemeTag = {
+							TextColor3 = "Text",
+						},
+					}),
+					ag.New("TextButton", {
+						Size = UDim2.new(0, 50, 1, 0),
+						Position = UDim2.new(1, -50, 0, 0),
+						BackgroundTransparency = 1,
+						Text = keybind or "None",
+						TextSize = 12,
+						FontFace = Font.new(ag.Font, Enum.FontWeight.SemiBold),
+						ThemeTag = {
+							TextColor3 = "Accent",
+						},
+					}),
+				})
+			
+				ag.AddSignal(keybindItem.TextButton.MouseButton1Click, function()
+					if callback then
+						callback()
+					end
+				end)
+			
+				aq.KeybindContainer.CanvasSize = UDim2.new(0, 0, 0, #aq.KeybindContainer:GetChildren() * 30 + aq.UIPadding)
+			end--]]
+
+			local function AddDraggableMenu(Name, Parent)
+				local Background = ag.New("Frame", {
+					AutomaticSize = "Y",
+					Position = UDim2.fromOffset(6, 6),
+					Size = UDim2.fromOffset(0, 0),
+					BackgroundTransparency = 1,
+					Parent = Parent,
+					ZIndex = 999
+				}, {
+					ag.NewRoundFrame(aq.UICorner, "SquircleOutline", {
+						Size = UDim2.new(1, 0, 1, 0),
+						ThemeTag = {
+							ImageColor3 = "Outline",
+						},
+					}),
+				})
+				ag.AddThemeObject(Background, { BackgroundColor3 = "Background" })
+			
+				local Holder = ag.New("Frame", {
+					Position = UDim2.fromOffset(2, 2),
+					Size = UDim2.new(1, -4, 1, -4),
+					ThemeTag = {
+						BackgroundColor3 = "Background",
+					},
+					Parent = Background,
+				}, {
+					ag.New("UICorner", {
+						CornerRadius = UDim.new(0, aq.UICorner - 1),
+					}),
+					ag.New("Frame", {
+						Position = UDim2.fromOffset(0, 34),
+						Size = UDim2.new(1, 0, 0, 1),
+						ThemeTag = {
+							BackgroundColor3 = "Text",
+						},
+					}),
+				})
+			
+				local Label = ag.New("TextLabel", {
+					Size = UDim2.new(1, 0, 0, 34),
+					Text = Name,
+					TextXAlignment = "Left",
+					TextSize = 15,
+					FontFace = Font.new(ag.Font, Enum.FontWeight.Medium),
+					ThemeTag = {
+						TextColor3 = "Text",
+					},
+					BackgroundTransparency = 1,
+					Parent = Holder,
+				}, {
+					ag.New("UIPadding", {
+						PaddingLeft = UDim.new(0, 12),
+						PaddingRight = UDim.new(0, 12),
+					}),
+				})
+			
+				local Container = ag.New("Frame", {
+					Position = UDim2.fromOffset(0, 35),
+					Size = UDim2.new(1, 0, 1, -35),
+					BackgroundTransparency = 1,
+					Parent = Holder,
+				}, {
+					ag.New("UIListLayout", {
+						Padding = UDim.new(0, 7),
+					}),
+					ag.New("UIPadding", {
+						PaddingBottom = UDim.new(0, 7),
+						PaddingLeft = UDim.new(0, 7),
+						PaddingRight = UDim.new(0, 7),
+						PaddingTop = UDim.new(0, 7),
+					}),
+				})
+		
+				ag.Drag(Background, {Label}, nil)
+			
+				return Background, Container, Label
+			end
+			
+			aq.KeybindFrame, aq.KeybindContainer, aq.KeybindLabel = AddDraggableMenu("Keybinds", aq.UIElements.Main)
+			aq.KeybindFrame.AnchorPoint = Vector2.new(0, 0.5)
+			aq.KeybindFrame.Position = UDim2.new(0, 6, 0.5, 0)
+			aq.KeybindFrame.Visible = false
+			aq.KeybindFrame.AutomaticSize = "Y"
+			
+			local closeBtn = ag.New("TextButton", {
+				Size = UDim2.new(0, 20, 0, 20),
+				Position = UDim2.new(1, -12, 0, 7),
+				AnchorPoint = Vector2.new(1, 0),
+				BackgroundTransparency = 1,
+				Text = "x",
+				TextYAlignment = Enum.TextYAlignment.Center,
+				Parent = aq.KeybindLabel,
+			}, {
+				ag.Image("x", "close", 0, aq.Folder, "KeybindClose", true),
+				ag.New("UICorner", {
+					CornerRadius = UDim.new(0, 10),
+				}),
+			})
+			
+			ag.AddSignal(closeBtn.MouseButton1Click, function()
+				aq.KeybindFrame.Visible = false
+			end)
+			
+			--[[aq:CreateTopbarButton("Keybinds", "key", function()
+				aq.KeybindFrame.Visible = not aq.KeybindFrame.Visible
+			end, 996)--]]
+			
+			function aq:AddKeybind(name, keybind, callback)
+				local keybindItem = ag.New("Frame", {
+					Size = UDim2.new(1, 0, 0, 20),
+					BackgroundTransparency = 1,
+					Parent = aq.KeybindContainer,
+				}, {
+					ag.New("TextLabel", {
+						Size = UDim2.new(1, -60, 1, 0),
+						BackgroundTransparency = 1,
+						Text = name,
+						TextXAlignment = "Left",
+						TextSize = 14,
+						FontFace = Font.new(ag.Font, Enum.FontWeight.Medium),
+						ThemeTag = {
+							TextColor3 = "Text",
+						},
+					}),
+					ag.New("TextButton", {
+						Size = UDim2.new(0, 50, 1, 0),
+						Position = UDim2.new(1, -50, 0, 0),
+						BackgroundTransparency = 1,
+						Text = keybind or "None",
+						TextSize = 12,
+						FontFace = Font.new(ag.Font, Enum.FontWeight.SemiBold),
+						ThemeTag = {
+							TextColor3 = "Accent",
+						},
+					}),
+				})
+			
+				ag.AddSignal(keybindItem.TextButton.MouseButton1Click, function()
+					if callback then
+						callback()
+					end
+				end)
+
+				aq.KeybindFrame.Size = UDim2.new(0, 300, 0, aq.KeybindFrame.AbsoluteSize.Y + 18)
+			end		
+
+			shared.KEYBIND_FRAME_WIND_UI_ADD_KEYBIND_FUNCTION = function(name, keybind, callback)
+				aq:AddKeybind(name, keybind, callback)
+			end
 
 			function aq.SetToggleKey(j, l)
 				aq.ToggleKey = l
@@ -10994,18 +11301,47 @@ local al = ak.New
 local am = ak.Tween
 
 local an = a.load("p")
-local ao = 
-game:GetService("Players") and game:GetService("Players").LocalPlayer or nil
+local ao = LocalPlayer
 
 local forceRefresh = shared.ForcePlayerGui
 
 local ap = not forceRefresh and protectgui or (syn and syn.protect_gui) or function() end
 
-local aq = not forceRefresh and gethui and gethui() or (not forceRefresh and game.CoreGui or game.Players.LocalPlayer:WaitForChild("PlayerGui"))
+local function SafeParentUI(Instance: Instance, Parent: Instance | () -> Instance)
+    local success, _error = pcall(function()
+        if not Parent then
+            Parent = CoreGui
+        end
+
+        local DestinationParent
+        if typeof(Parent) == "function" then
+            DestinationParent = Parent()
+        else
+            DestinationParent = Parent
+        end
+
+        Instance.Parent = DestinationParent
+    end)
+
+    if not (success and Instance.Parent) then
+        Instance.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui", math.huge)
+    end
+end
+
+local function ParentUI(UI: Instance, SkipHiddenUI: boolean?)
+    if SkipHiddenUI then
+        SafeParentUI(UI, CoreGui)
+        return
+    end
+
+    pcall(protectgui, UI)
+    SafeParentUI(UI, gethui)
+end
+
+local aq = not forceRefresh and gethui and gethui() or (not forceRefresh and CoreGui or LocalPlayer:WaitForChild("PlayerGui"))
 
 ac.ScreenGui = al("ScreenGui", {
 	Name = "WindUI",
-	Parent = aq,
 	IgnoreGuiInset = true,
 	ScreenInsets = "None",
 }, {
@@ -11026,20 +11362,19 @@ ac.ScreenGui = al("ScreenGui", {
 		Name = "ToolTips",
 	}),
 })
+ParentUI(ac.ScreenGui)
 
 ac.NotificationGui = al("ScreenGui", {
 	Name = "WindUI/Notifications",
-	Parent = aq,
 	IgnoreGuiInset = true,
 })
+ParentUI(ac.NotificationGui)
+
 ac.DropdownGui = al("ScreenGui", {
 	Name = "WindUI/Dropdowns",
-	Parent = aq,
 	IgnoreGuiInset = true,
 })
-ap(ac.ScreenGui)
-ap(ac.NotificationGui)
-ap(ac.DropdownGui)
+ParentUI(ac.DropdownGui)
 
 ak.Init(ac)
 
@@ -11197,7 +11532,7 @@ function ac.CreateWindow(as, at)
 	ak.SetTheme(ax)
 
 	local ay = gethwid or function()
-		return game:GetService("Players").LocalPlayer.UserId
+		return LocalPlayer.UserId
 	end
 
 	local az = ay()
