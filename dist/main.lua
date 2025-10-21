@@ -19,10 +19,11 @@ local cloneref = (cloneref or clonereference or function(instance: any)
     return instance
 end)
 
-if not shared.VoidwareInkGame then
-	cloneref = function(instance: any)
-		return instance
-	end
+if not shared.VoidwareInkGame or shared.CLONEREF_BACKUP_MODE then
+    if shared.VoidDev then warn("clone backup mode") end
+    cloneref = function(instance: any)
+        return instance
+    end
 end
 
 local CoreGui; pcall(function()
@@ -40,9 +41,28 @@ local TouchInputService: TouchInputService = cloneref(game:GetService("TouchInpu
 local LocalizationService: LocalizationService = cloneref(game:GetService("LocalizationService"))
 local HttpService: HttpService = cloneref(game:GetService("HttpService"))
 local Lighting: Lighting = cloneref(game:GetService("Lighting"))
+local GuiService: GuiService = cloneref(game:GetService("GuiService"))
 
 local LocalPlayer = Players.LocalPlayer or Players.PlayerAdded:Wait()
-local Mouse = cloneref(LocalPlayer:GetMouse())
+local Mouse
+--local Mouse = cloneref(LocalPlayer:GetMouse())
+if shared.CLONEREF_BACKUP_MODE then
+    Mouse = setmetatable({}, {
+        __tostring = function()
+            return tostring(UserInputService:GetMouseLocation() - GuiService:GetGuiInset())
+        end,
+        __index = function(_, key)
+            if key == "X" or key == "Y" then
+                local position = UserInputService:GetMouseLocation() - GuiService:GetGuiInset()
+                return position[key]
+            elseif key == "Position" then
+                return UserInputService:GetMouseLocation() - GuiService:GetGuiInset()
+            end
+        end
+    })
+else
+    Mouse = cloneref(LocalPlayer:GetMouse())
+end
 
 local getgenv = getgenv or function()
     return shared
@@ -7122,7 +7142,7 @@ workspace.CurrentCamera
 
 		local al = aj.RenderStepped
 		local am = ak.LocalPlayer
-		local an = cloneref(am:GetMouse())
+		local an = Mouse
 
 		local ao = a.load("i").New
 		local ap = a.load("j").New
