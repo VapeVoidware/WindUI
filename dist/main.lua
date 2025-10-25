@@ -4667,6 +4667,7 @@ do
 				UIPadding = ae.Window.ElementConfig.UIPadding,
 				UICorner = ae.Window.ElementConfig.UICorner,
 				UIElements = {},
+				LockText = ae.LockText or "Locked",
 
 				Index = ae.Index,
 			}
@@ -4804,7 +4805,7 @@ do
 			ao.ImageLabel.ImageTransparency = 0.4
 
 			local ap = ab("TextLabel", {
-				Text = "Locked",
+				Text = af.LockText,
 				TextSize = 18,
 				FontFace = Font.new(aa.Font, Enum.FontWeight.Medium),
 				AutomaticSize = "XY",
@@ -5195,6 +5196,7 @@ do
 				__type = "Button",
 				Title = ae.Title or "Button",
 				Desc = ae.Desc or nil,
+				LockText = ae.LockText or nil,
 				Icon = ae.Icon or "mouse-pointer-click",
 				IconThemed = ae.IconThemed or false,
 				Color = ae.Color,
@@ -5210,6 +5212,7 @@ do
 			af.ButtonFrame = a.load("y")({
 				Title = af.Title,
 				Desc = af.Desc,
+				LockText = af.LockText,
 				Parent = ae.Parent,
 
 				Window = ae.Window,
