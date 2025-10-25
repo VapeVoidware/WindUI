@@ -3353,8 +3353,43 @@ do
                     Button = Color3.fromHex("#059669"),
                     Icon = Color3.fromHex("#10b981"),
                 },
+
+				Halloween = {
+					Name = "Halloween",
+					Accent = Color3.fromHex("#ff7518"), 
+					Dialog = Color3.fromHex("#2e1408"), 
+					Outline = Color3.fromHex("#ffb366"), 
+					Text = Color3.fromHex("#fff3e0"), 
+					Placeholder = Color3.fromHex("#d88a4a"), 
+					Background = Color3.fromHex("#431c0d"), 
+					Button = Color3.fromHex("#ff822e"), 
+					Icon = Color3.fromHex("#ffb875"),
+				},
+			
+				HalloweenMidnight = {
+					Name = "Halloween Midnight",
+					Accent = Color3.fromHex("#b347ff"),
+					Dialog = Color3.fromHex("#1a0a26"), 
+					Outline = Color3.fromHex("#ff7518"), 
+					Text = Color3.fromHex("#f3e8ff"),
+					Placeholder = Color3.fromHex("#b080d9"),
+					Background = Color3.fromHex("#0a0214"),
+					Button = Color3.fromHex("#d97706"),
+					Icon = Color3.fromHex("#ffb347"), 
+				},
+			
+				HalloweenNight = {
+					Name = "Halloween Night",
+					Accent = Color3.fromHex("#ff6600"),
+					Dialog = Color3.fromHex("#140a0a"),
+					Outline = Color3.fromHex("#fbbf24"),
+					Text = Color3.fromHex("#fef3c7"),
+					Placeholder = Color3.fromHex("#b45309"),
+					Background = Color3.fromHex("#0a0603"),
+					Button = Color3.fromHex("#ff7518"),
+					Icon = Color3.fromHex("#ff9900"),
+				},
             
-                -- Nature & Soft Themes
                 Forest = {
                     Name = "Forest",
                     Accent = Color3.fromHex("#1e5631"),
@@ -3411,7 +3446,6 @@ do
                     Icon = Color3.fromHex("#ffd7b3"),
                 },
             
-                -- Cool Experimental
                 Aqua = {
                     Name = "Aqua",
                     Accent = Color3.fromHex("#00bcd4"),
@@ -3434,8 +3468,7 @@ do
                     Button = Color3.fromHex("#8fffc1"),
                     Icon = Color3.fromHex("#b8fff0"),
                 },
-            
-               -- ⚡ Brighter Neon Pack ⚡
+
 				NeonBlue = {
 					Name = "Neon Blue",
 					Accent = Color3.fromHex("#33f6ff"),
