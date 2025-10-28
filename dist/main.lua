@@ -3308,7 +3308,6 @@ do
 					Icon = "#e9d5ff", 
 				},
             
-                -- Colorful Themes
                 Indigo = {
                     Name = "Indigo",
                     Accent = Color3.fromHex("#3730a3"),
@@ -3357,13 +3356,13 @@ do
 				Halloween = {
 					Name = "Halloween",
 					Accent = Color3.fromHex("#ff7518"), 
-					Dialog = Color3.fromHex("#2e1408"), 
-					Outline = Color3.fromHex("#ffb366"), 
-					Text = Color3.fromHex("#fff3e0"), 
-					Placeholder = Color3.fromHex("#d88a4a"), 
-					Background = Color3.fromHex("#431c0d"), 
-					Button = Color3.fromHex("#ff822e"), 
-					Icon = Color3.fromHex("#ffb875"),
+					Dialog = Color3.fromHex("#2e1408"),
+					Outline = Color3.fromHex("#ffb66a"),  
+					Text = Color3.fromHex("#fff3e0"),  
+					Placeholder = Color3.fromHex("#d88a4a"),
+					Background = Color3.fromHex("#3b180b"), 
+					Button = Color3.fromHex("#ff8c33"),     
+					Icon = Color3.fromHex("#ffbb88"),       
 				},
 			
 				HalloweenMidnight = {
@@ -9749,7 +9748,7 @@ as, at = ap:New(ar)
 							BackgroundTransparency = 1,
 						}, {
 							ai("TextLabel", {
-								Text = aq.User.Anonymous and "Anonymous" or game.Players.LocalPlayer.DisplayName,
+								Text = aq.User.Anonymous and "Anonymous" or Players.LocalPlayer.DisplayName,
 								TextSize = 17,
 								ThemeTag = {
 									TextColor3 = "Text",
@@ -9763,7 +9762,7 @@ as, at = ap:New(ar)
 								Name = "DisplayName",
 							}),
 							ai("TextLabel", {
-								Text = aq.User.Anonymous and "anonymous" or game.Players.LocalPlayer.Name,
+								Text = aq.User.Anonymous and "anonymous" or Players.LocalPlayer.Name,
 								TextSize = 15,
 								TextTransparency = 0.6,
 								ThemeTag = {
@@ -9822,8 +9821,8 @@ as, at = ap:New(ar)
 					end
 					aq.User.Anonymous = aA
 					ay.UserIcon.ImageLabel.Image = GetUserThumb()
-					ay.UserIcon.Frame.DisplayName.Text = aA and "Anonymous" or game.Players.LocalPlayer.DisplayName
-					ay.UserIcon.Frame.UserName.Text = aA and "anonymous" or game.Players.LocalPlayer.Name
+					ay.UserIcon.Frame.DisplayName.Text = aA and "Anonymous" or Players.LocalPlayer.DisplayName
+					ay.UserIcon.Frame.UserName.Text = aA and "anonymous" or Players.LocalPlayer.Name
 				end
 
 				if aq.User.Enabled then
@@ -11380,7 +11379,7 @@ local function SafeParentUI(Instance: Instance, Parent: Instance | () -> Instanc
     end)
 
     if not (success and Instance.Parent) then
-        Instance.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui", math.huge)
+        Instance.Parent = Players.LocalPlayer:WaitForChild("PlayerGui", math.huge)
     end
 end
 
