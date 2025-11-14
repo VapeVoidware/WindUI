@@ -9426,7 +9426,11 @@ as, at = ap:New(ar)
 		local ai = ag.New
 		ai = function(...)
 			local args = {...}
-			return pcall(ag.New, unpack(args))
+			local suc, res = pcall(ag.New, unpack(args))
+			if not suc then
+				warn(`[Wind GUI Error]: {tostring(res)}`)
+			end
+			return res
 		end
 		local aj = ag.Tween
 
