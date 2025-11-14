@@ -9424,6 +9424,10 @@ as, at = ap:New(ar)
 
 		local ag = a.load("a")
 		local ai = ag.New
+		ai = function(...)
+			local args = {...}
+			return pcall(ag.New, unpack(args))
+		end
 		local aj = ag.Tween
 
 		local ak = a.load("s").New
