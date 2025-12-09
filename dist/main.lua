@@ -439,7 +439,7 @@ do
 		end
 
 		function m.Icon(p)
-			return j.Icon(p)
+			return j.Icon(p, nil, true)
 		end
 
 		function m.AddIcons(p, r)
