@@ -3353,6 +3353,18 @@ do
                     Icon = Color3.fromHex("#10b981"),
                 },
 
+				Christmas = {
+					Name = "Christmas",
+					Accent = Color3.fromHex("#2ecc71"),     
+					Dialog = Color3.fromHex("#144d12"),     
+					Outline = Color3.fromHex("#e74c3c"),    
+					Text = Color3.fromHex("#fffaf5"),       
+					Placeholder = Color3.fromHex("#c7d9c7"),
+					Background = Color3.fromHex("#1b2e1b"), 
+					Button = Color3.fromHex("#e63939"),
+					Icon = Color3.fromHex("#ffdfba"),
+				},				
+
 				Halloween = {
 					Name = "Halloween",
 					Accent = Color3.fromHex("#ff7518"), 
