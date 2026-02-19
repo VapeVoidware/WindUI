@@ -16,17 +16,19 @@
 ]]
 
 local cloneref = (cloneref or clonereference or function(instance: any)
-    return instance
+	return instance
 end)
 
 if not shared.VoidwareInkGame or shared.CLONEREF_BACKUP_MODE then
-    if shared.VoidDev then warn("clone backup mode") end
-    cloneref = function(instance: any)
-        return instance
-    end
+	if shared.VoidDev then
+		warn("clone backup mode")
+	end
+	cloneref = function(instance: any)
+		return instance
+	end
 end
-
-local CoreGui; pcall(function()
+local CoreGui
+pcall(function()
 	CoreGui = cloneref(game:GetService("CoreGui"))
 end)
 local Players: Players = cloneref(game:GetService("Players"))
@@ -47,30 +49,30 @@ local LocalPlayer = Players.LocalPlayer or Players.PlayerAdded:Wait()
 local Mouse
 --local Mouse = cloneref(LocalPlayer:GetMouse())
 if shared.CLONEREF_BACKUP_MODE then
-    Mouse = setmetatable({}, {
-        __tostring = function()
-            return tostring(UserInputService:GetMouseLocation() - GuiService:GetGuiInset())
-        end,
-        __index = function(_, key)
-            if key == "X" or key == "Y" then
-                local position = UserInputService:GetMouseLocation() - GuiService:GetGuiInset()
-                return position[key]
-            elseif key == "Position" then
-                return UserInputService:GetMouseLocation() - GuiService:GetGuiInset()
-            end
-        end
-    })
+	Mouse = setmetatable({}, {
+		__tostring = function()
+			return tostring(UserInputService:GetMouseLocation() - GuiService:GetGuiInset())
+		end,
+		__index = function(_, key)
+			if key == "X" or key == "Y" then
+				local position = UserInputService:GetMouseLocation() - GuiService:GetGuiInset()
+				return position[key]
+			elseif key == "Position" then
+				return UserInputService:GetMouseLocation() - GuiService:GetGuiInset()
+			end
+		end,
+	})
 else
-    Mouse = cloneref(LocalPlayer:GetMouse())
+	Mouse = cloneref(LocalPlayer:GetMouse())
 end
 
 local getgenv = getgenv or function()
-    return shared
+	return shared
 end
 local setclipboard = setclipboard or nil
 local protectgui = protectgui or (syn and syn.protect_gui) or function() end
 local gethui = gethui or function()
-    return CoreGui
+	return CoreGui
 end
 
 local a
@@ -501,8 +503,7 @@ do
 			end
 
 			local function getSliceCenterForType(C)
-				return C ~= "Shadow-sm" and Rect.new(256, 256, 256, 256
-) or Rect.new(512, 512, 512, 512)
+				return C ~= "Shadow-sm" and Rect.new(256, 256, 256, 256) or Rect.new(512, 512, 512, 512)
 			end
 
 			local C = m.New(A and "ImageButton" or "ImageLabel", {
@@ -3263,132 +3264,176 @@ do
 	function a.r()
 		return function(aa)
 			return {
-                -- Core Themes
-                Dark = {
-                    Name = "Dark",
-                    Accent = Color3.fromHex("#18181b"),
-                    Dialog = Color3.fromHex("#161616"),
-                    Outline = Color3.fromHex("#FFFFFF"),
-                    Text = Color3.fromHex("#FFFFFF"),
-                    Placeholder = Color3.fromHex("#7a7a7a"),
-                    Background = Color3.fromHex("#101010"),
-                    Button = Color3.fromHex("#52525b"),
-                    Icon = Color3.fromHex("#a1a1aa"),
-                },
-                Light = {
-                    Name = "Light",
-                    Accent = Color3.fromHex("#FFFFFF"),
-                    Dialog = Color3.fromHex("#f4f4f5"),
-                    Outline = Color3.fromHex("#09090b"),
-                    Text = Color3.fromHex("#000000"),
-                    Placeholder = Color3.fromHex("#777777"),
-                    Background = Color3.fromHex("#e4e4e7"),
-                    Button = Color3.fromHex("#18181b"),
-                    Icon = Color3.fromHex("#52525b"),
-                },
-                Red = {
-                    Name = "Red",
-                    Accent = Color3.fromHex("#991b1b"),
-                    Dialog = Color3.fromHex("#450a0a"),
-                    Outline = Color3.fromHex("#fecaca"),
-                    Text = Color3.fromHex("#fef2f2"),
-                    Placeholder = Color3.fromHex("#d95353"),
-                    Background = Color3.fromHex("#1c0606"),
-                    Button = Color3.fromHex("#dc2626"),
-                    Icon = Color3.fromHex("#ef4444"),
-                },
-                Lavender = { 
-					Name = "Lavender", 
-					Accent = "#b497bd", 
-					Outline = "#f3e8ff", 
-					Text = "#f3e8ff", 
-					Placeholder = "#d8b4ff", 
-					Background = "#5d3a6d", 
-					Button = "#b497bd", 
-					Icon = "#e9d5ff", 
+				LoveLetter = {
+					Name = "Love Letter",
+					Accent = Color3.fromHex("#e2e2d5"), -- Aged Paper
+					Dialog = Color3.fromHex("#f5f5dc"),
+					Outline = Color3.fromHex("#704241"), -- Dried Rose
+					Text = Color3.fromHex("#2d2d2d"), -- Ink Black
+					Placeholder = Color3.fromHex("#a68a8a"),
+					Background = Color3.fromHex("#ece0d1"),
+					Button = Color3.fromHex("#5d3a3a"),
+					Icon = Color3.fromHex("#8c6b6b"),
 				},
-            
-                Indigo = {
-                    Name = "Indigo",
-                    Accent = Color3.fromHex("#3730a3"),
-                    Dialog = Color3.fromHex("#1e1b4b"),
-                    Outline = Color3.fromHex("#c7d2fe"),
-                    Text = Color3.fromHex("#f1f5f9"),
-                    Placeholder = Color3.fromHex("#7078d9"),
-                    Background = Color3.fromHex("#0f0a2e"),
-                    Button = Color3.fromHex("#4f46e5"),
-                    Icon = Color3.fromHex("#6366f1"),
-                },
-                Violet = {
-                    Name = "Violet",
-                    Accent = Color3.fromHex("#7c3aed"),
-                    Dialog = Color3.fromHex("#3c1361"),
-                    Outline = Color3.fromHex("#ddd6fe"),
-                    Text = Color3.fromHex("#faf5ff"),
-                    Placeholder = Color3.fromHex("#c4b5fd"),
-                    Background = Color3.fromHex("#1e0a3e"),
-                    Button = Color3.fromHex("#7c3aed"),
-                    Icon = Color3.fromHex("#a78bfa"),
-                },
-                Amber = {
-                    Name = "Amber",
-                    Accent = Color3.fromHex("#b45309"),
-                    Dialog = Color3.fromHex("#451a03"),
-                    Outline = Color3.fromHex("#fde68a"),
-                    Text = Color3.fromHex("#fffbeb"),
-                    Placeholder = Color3.fromHex("#fcd34d"),
-                    Background = Color3.fromHex("#1c1003"),
-                    Button = Color3.fromHex("#d97706"),
-                    Icon = Color3.fromHex("#f59e0b"),
-                },
-                Emerald = {
-                    Name = "Emerald",
-                    Accent = Color3.fromHex("#047857"),
-                    Dialog = Color3.fromHex("#022c22"),
-                    Outline = Color3.fromHex("#a7f3d0"),
-                    Text = Color3.fromHex("#ecfdf5"),
-                    Placeholder = Color3.fromHex("#3fbf8f"),
-                    Background = Color3.fromHex("#011411"),
-                    Button = Color3.fromHex("#059669"),
-                    Icon = Color3.fromHex("#10b981"),
-                },
+				Sweetheart = {
+					Name = "Sweetheart",
+					Accent = Color3.fromHex("#ff85a1"),
+					Dialog = Color3.fromHex("#ffc2d1"),
+					Outline = Color3.fromHex("#fb6f92"),
+					Text = Color3.fromHex("#ffe5ec"),
+					Placeholder = Color3.fromHex("#ffb3c1"),
+					Background = Color3.fromHex("#4d0d1d"),
+					Button = Color3.fromHex("#ff5c8a"),
+					Icon = Color3.fromHex("#ffafcc"),
+				},
+				Valentine = {
+					Name = "Valentine",
+					Accent = Color3.fromHex("#e11d48"),
+					Dialog = Color3.fromHex("#4c0519"),
+					Outline = Color3.fromHex("#ffe4e6"),
+					Text = Color3.fromHex("#fff1f2"),
+					Placeholder = Color3.fromHex("#fb7185"),
+					Background = Color3.fromHex("#1f030b"),
+					Button = Color3.fromHex("#be123c"),
+					Icon = Color3.fromHex("#fda4af"),
+				},
+				Christmas = {
+					Name = "Christmas",
+					Accent = Color3.fromHex("#2ecc71"),
+					Dialog = Color3.fromHex("#144d12"),
+					Outline = Color3.fromHex("#e74c3c"),
+					Text = Color3.fromHex("#fffaf5"),
+					Placeholder = Color3.fromHex("#c7d9c7"),
+					Background = Color3.fromHex("#1b2e1b"),
+					Button = Color3.fromHex("#e63939"),
+					Icon = Color3.fromHex("#ffdfba"),
+				},
+				-- Core Themes
+				Dark = {
+					Name = "Dark",
+					Accent = Color3.fromHex("#18181b"),
+					Dialog = Color3.fromHex("#161616"),
+					Outline = Color3.fromHex("#FFFFFF"),
+					Text = Color3.fromHex("#FFFFFF"),
+					Placeholder = Color3.fromHex("#7a7a7a"),
+					Background = Color3.fromHex("#101010"),
+					Button = Color3.fromHex("#52525b"),
+					Icon = Color3.fromHex("#a1a1aa"),
+				},
+				Light = {
+					Name = "Light",
+					Accent = Color3.fromHex("#FFFFFF"),
+					Dialog = Color3.fromHex("#f4f4f5"),
+					Outline = Color3.fromHex("#09090b"),
+					Text = Color3.fromHex("#000000"),
+					Placeholder = Color3.fromHex("#777777"),
+					Background = Color3.fromHex("#e4e4e7"),
+					Button = Color3.fromHex("#18181b"),
+					Icon = Color3.fromHex("#52525b"),
+				},
+				Red = {
+					Name = "Red",
+					Accent = Color3.fromHex("#991b1b"),
+					Dialog = Color3.fromHex("#450a0a"),
+					Outline = Color3.fromHex("#fecaca"),
+					Text = Color3.fromHex("#fef2f2"),
+					Placeholder = Color3.fromHex("#d95353"),
+					Background = Color3.fromHex("#1c0606"),
+					Button = Color3.fromHex("#dc2626"),
+					Icon = Color3.fromHex("#ef4444"),
+				},
+				Lavender = {
+					Name = "Lavender",
+					Accent = "#b497bd",
+					Outline = "#f3e8ff",
+					Text = "#f3e8ff",
+					Placeholder = "#d8b4ff",
+					Background = "#5d3a6d",
+					Button = "#b497bd",
+					Icon = "#e9d5ff",
+				},
+
+				Indigo = {
+					Name = "Indigo",
+					Accent = Color3.fromHex("#3730a3"),
+					Dialog = Color3.fromHex("#1e1b4b"),
+					Outline = Color3.fromHex("#c7d2fe"),
+					Text = Color3.fromHex("#f1f5f9"),
+					Placeholder = Color3.fromHex("#7078d9"),
+					Background = Color3.fromHex("#0f0a2e"),
+					Button = Color3.fromHex("#4f46e5"),
+					Icon = Color3.fromHex("#6366f1"),
+				},
+				Violet = {
+					Name = "Violet",
+					Accent = Color3.fromHex("#7c3aed"),
+					Dialog = Color3.fromHex("#3c1361"),
+					Outline = Color3.fromHex("#ddd6fe"),
+					Text = Color3.fromHex("#faf5ff"),
+					Placeholder = Color3.fromHex("#c4b5fd"),
+					Background = Color3.fromHex("#1e0a3e"),
+					Button = Color3.fromHex("#7c3aed"),
+					Icon = Color3.fromHex("#a78bfa"),
+				},
+				Amber = {
+					Name = "Amber",
+					Accent = Color3.fromHex("#b45309"),
+					Dialog = Color3.fromHex("#451a03"),
+					Outline = Color3.fromHex("#fde68a"),
+					Text = Color3.fromHex("#fffbeb"),
+					Placeholder = Color3.fromHex("#fcd34d"),
+					Background = Color3.fromHex("#1c1003"),
+					Button = Color3.fromHex("#d97706"),
+					Icon = Color3.fromHex("#f59e0b"),
+				},
+				Emerald = {
+					Name = "Emerald",
+					Accent = Color3.fromHex("#047857"),
+					Dialog = Color3.fromHex("#022c22"),
+					Outline = Color3.fromHex("#a7f3d0"),
+					Text = Color3.fromHex("#ecfdf5"),
+					Placeholder = Color3.fromHex("#3fbf8f"),
+					Background = Color3.fromHex("#011411"),
+					Button = Color3.fromHex("#059669"),
+					Icon = Color3.fromHex("#10b981"),
+				},
 
 				Christmas = {
 					Name = "Christmas",
-					Accent = Color3.fromHex("#2ecc71"),     
-					Dialog = Color3.fromHex("#144d12"),     
-					Outline = Color3.fromHex("#e74c3c"),    
-					Text = Color3.fromHex("#fffaf5"),       
+					Accent = Color3.fromHex("#2ecc71"),
+					Dialog = Color3.fromHex("#144d12"),
+					Outline = Color3.fromHex("#e74c3c"),
+					Text = Color3.fromHex("#fffaf5"),
 					Placeholder = Color3.fromHex("#c7d9c7"),
-					Background = Color3.fromHex("#1b2e1b"), 
+					Background = Color3.fromHex("#1b2e1b"),
 					Button = Color3.fromHex("#e63939"),
 					Icon = Color3.fromHex("#ffdfba"),
-				},				
+				},
 
 				Halloween = {
 					Name = "Halloween",
-					Accent = Color3.fromHex("#ff7518"), 
+					Accent = Color3.fromHex("#ff7518"),
 					Dialog = Color3.fromHex("#2e1408"),
-					Outline = Color3.fromHex("#ffb66a"),  
-					Text = Color3.fromHex("#fff3e0"),  
+					Outline = Color3.fromHex("#ffb66a"),
+					Text = Color3.fromHex("#fff3e0"),
 					Placeholder = Color3.fromHex("#d88a4a"),
-					Background = Color3.fromHex("#3b180b"), 
-					Button = Color3.fromHex("#ff8c33"),     
-					Icon = Color3.fromHex("#ffbb88"),       
+					Background = Color3.fromHex("#3b180b"),
+					Button = Color3.fromHex("#ff8c33"),
+					Icon = Color3.fromHex("#ffbb88"),
 				},
-			
+
 				HalloweenMidnight = {
 					Name = "Halloween Midnight",
 					Accent = Color3.fromHex("#b347ff"),
-					Dialog = Color3.fromHex("#1a0a26"), 
-					Outline = Color3.fromHex("#ff7518"), 
+					Dialog = Color3.fromHex("#1a0a26"),
+					Outline = Color3.fromHex("#ff7518"),
 					Text = Color3.fromHex("#f3e8ff"),
 					Placeholder = Color3.fromHex("#b080d9"),
 					Background = Color3.fromHex("#0a0214"),
 					Button = Color3.fromHex("#d97706"),
-					Icon = Color3.fromHex("#ffb347"), 
+					Icon = Color3.fromHex("#ffb347"),
 				},
-			
+
 				HalloweenNight = {
 					Name = "Halloween Night",
 					Accent = Color3.fromHex("#ff6600"),
@@ -3400,85 +3445,85 @@ do
 					Button = Color3.fromHex("#ff7518"),
 					Icon = Color3.fromHex("#ff9900"),
 				},
-            
-                Forest = {
-                    Name = "Forest",
-                    Accent = Color3.fromHex("#1e5631"),
-                    Dialog = Color3.fromHex("#0b2f1a"),
-                    Outline = Color3.fromHex("#d4edda"),
-                    Text = Color3.fromHex("#d4edda"),
-                    Placeholder = Color3.fromHex("#a7d7a7"),
-                    Background = Color3.fromHex("#061a0f"),
-                    Button = Color3.fromHex("#1e5631"),
-                    Icon = Color3.fromHex("#76c893"),
-                },
-                Ocean = {
-                    Name = "Ocean",
-                    Accent = Color3.fromHex("#0288d1"),
-                    Dialog = Color3.fromHex("#014f86"),
-                    Outline = Color3.fromHex("#cce7ff"),
-                    Text = Color3.fromHex("#cce7ff"),
-                    Placeholder = Color3.fromHex("#80d0ff"),
-                    Background = Color3.fromHex("#012a47"),
-                    Button = Color3.fromHex("#0288d1"),
-                    Icon = Color3.fromHex("#99e0ff"),
-                },
-                Coral = {
-                    Name = "Coral",
-                    Accent = Color3.fromHex("#ff6f61"),
-                    Dialog = Color3.fromHex("#7a2c27"),
-                    Outline = Color3.fromHex("#ffe5e0"),
-                    Text = Color3.fromHex("#ffe5e0"),
-                    Placeholder = Color3.fromHex("#ff9f91"),
-                    Background = Color3.fromHex("#3d1613"),
-                    Button = Color3.fromHex("#ff6f61"),
-                    Icon = Color3.fromHex("#ffb3ab"),
-                },
-                Sunset = {
-                    Name = "Sunset",
-                    Accent = Color3.fromHex("#ff7e5f"),
-                    Dialog = Color3.fromHex("#882d17"),
-                    Outline = Color3.fromHex("#ffe3de"),
-                    Text = Color3.fromHex("#ffe3de"),
-                    Placeholder = Color3.fromHex("#ffad99"),
-                    Background = Color3.fromHex("#44160b"),
-                    Button = Color3.fromHex("#ff7e5f"),
-                    Icon = Color3.fromHex("#ffc4b1"),
-                },
-                Peach = {
-                    Name = "Peach",
-                    Accent = Color3.fromHex("#ffb380"),
-                    Dialog = Color3.fromHex("#7a3e23"),
-                    Outline = Color3.fromHex("#fff0e0"),
-                    Text = Color3.fromHex("#fff0e0"),
-                    Placeholder = Color3.fromHex("#ffc9a3"),
-                    Background = Color3.fromHex("#3d1f11"),
-                    Button = Color3.fromHex("#ff9966"),
-                    Icon = Color3.fromHex("#ffd7b3"),
-                },
-            
-                Aqua = {
-                    Name = "Aqua",
-                    Accent = Color3.fromHex("#00bcd4"),
-                    Dialog = Color3.fromHex("#004d59"),
-                    Outline = Color3.fromHex("#c0f4ff"),
-                    Text = Color3.fromHex("#c0f4ff"),
-                    Placeholder = Color3.fromHex("#80e5ff"),
-                    Background = Color3.fromHex("#002b33"),
-                    Button = Color3.fromHex("#00bcd4"),
-                    Icon = Color3.fromHex("#9ff7ff"),
-                },
-                Aurora = {
-                    Name = "Aurora",
-                    Accent = Color3.fromHex("#8fffc1"),
-                    Dialog = Color3.fromHex("#00332d"),
-                    Outline = Color3.fromHex("#e0fff9"),
-                    Text = Color3.fromHex("#e0fff9"),
-                    Placeholder = Color3.fromHex("#b0ffe0"),
-                    Background = Color3.fromHex("#001a16"),
-                    Button = Color3.fromHex("#8fffc1"),
-                    Icon = Color3.fromHex("#b8fff0"),
-                },
+
+				Forest = {
+					Name = "Forest",
+					Accent = Color3.fromHex("#1e5631"),
+					Dialog = Color3.fromHex("#0b2f1a"),
+					Outline = Color3.fromHex("#d4edda"),
+					Text = Color3.fromHex("#d4edda"),
+					Placeholder = Color3.fromHex("#a7d7a7"),
+					Background = Color3.fromHex("#061a0f"),
+					Button = Color3.fromHex("#1e5631"),
+					Icon = Color3.fromHex("#76c893"),
+				},
+				Ocean = {
+					Name = "Ocean",
+					Accent = Color3.fromHex("#0288d1"),
+					Dialog = Color3.fromHex("#014f86"),
+					Outline = Color3.fromHex("#cce7ff"),
+					Text = Color3.fromHex("#cce7ff"),
+					Placeholder = Color3.fromHex("#80d0ff"),
+					Background = Color3.fromHex("#012a47"),
+					Button = Color3.fromHex("#0288d1"),
+					Icon = Color3.fromHex("#99e0ff"),
+				},
+				Coral = {
+					Name = "Coral",
+					Accent = Color3.fromHex("#ff6f61"),
+					Dialog = Color3.fromHex("#7a2c27"),
+					Outline = Color3.fromHex("#ffe5e0"),
+					Text = Color3.fromHex("#ffe5e0"),
+					Placeholder = Color3.fromHex("#ff9f91"),
+					Background = Color3.fromHex("#3d1613"),
+					Button = Color3.fromHex("#ff6f61"),
+					Icon = Color3.fromHex("#ffb3ab"),
+				},
+				Sunset = {
+					Name = "Sunset",
+					Accent = Color3.fromHex("#ff7e5f"),
+					Dialog = Color3.fromHex("#882d17"),
+					Outline = Color3.fromHex("#ffe3de"),
+					Text = Color3.fromHex("#ffe3de"),
+					Placeholder = Color3.fromHex("#ffad99"),
+					Background = Color3.fromHex("#44160b"),
+					Button = Color3.fromHex("#ff7e5f"),
+					Icon = Color3.fromHex("#ffc4b1"),
+				},
+				Peach = {
+					Name = "Peach",
+					Accent = Color3.fromHex("#ffb380"),
+					Dialog = Color3.fromHex("#7a3e23"),
+					Outline = Color3.fromHex("#fff0e0"),
+					Text = Color3.fromHex("#fff0e0"),
+					Placeholder = Color3.fromHex("#ffc9a3"),
+					Background = Color3.fromHex("#3d1f11"),
+					Button = Color3.fromHex("#ff9966"),
+					Icon = Color3.fromHex("#ffd7b3"),
+				},
+
+				Aqua = {
+					Name = "Aqua",
+					Accent = Color3.fromHex("#00bcd4"),
+					Dialog = Color3.fromHex("#004d59"),
+					Outline = Color3.fromHex("#c0f4ff"),
+					Text = Color3.fromHex("#c0f4ff"),
+					Placeholder = Color3.fromHex("#80e5ff"),
+					Background = Color3.fromHex("#002b33"),
+					Button = Color3.fromHex("#00bcd4"),
+					Icon = Color3.fromHex("#9ff7ff"),
+				},
+				Aurora = {
+					Name = "Aurora",
+					Accent = Color3.fromHex("#8fffc1"),
+					Dialog = Color3.fromHex("#00332d"),
+					Outline = Color3.fromHex("#e0fff9"),
+					Text = Color3.fromHex("#e0fff9"),
+					Placeholder = Color3.fromHex("#b0ffe0"),
+					Background = Color3.fromHex("#001a16"),
+					Button = Color3.fromHex("#8fffc1"),
+					Icon = Color3.fromHex("#b8fff0"),
+				},
 
 				NeonBlue = {
 					Name = "Neon Blue",
@@ -3535,7 +3580,7 @@ do
 					Button = Color3.fromHex("#ff4de6"),
 					Icon = Color3.fromHex("#ff80ff"),
 				},
-            }	
+			}
 		end
 	end
 	function a.s()
@@ -5786,8 +5831,7 @@ do
 							ar.ScrollingEnabled = false
 							af = true
 							ak = RunService.RenderStepped:Connect(function()
-								local aw = aj and au.Position.X
-									or UserInputService:GetMouseLocation().X
+								local aw = aj and au.Position.X or UserInputService:GetMouseLocation().X
 								local ax = math.clamp(
 									(aw - ai.UIElements.SliderIcon.AbsolutePosition.X)
 										/ ai.UIElements.SliderIcon.AbsoluteSize.X,
@@ -6029,8 +6073,7 @@ do
 			UICorner = 8,
 			UIPadding = 8,
 		}
-		local af = a.load("i")
-.New
+		local af = a.load("i").New
 		local ag = a.load("j").New
 
 		function ae.New(ah, ai)
@@ -6582,8 +6625,7 @@ do
 		local ag = a.load("s").New
 		local ah = a.load("j").New
 		local ai = a.load("H").New
-		local aj = 
-workspace.CurrentCamera
+		local aj = workspace.CurrentCamera
 
 		local ak = {
 			UICorner = 10,
@@ -8213,8 +8255,7 @@ workspace.CurrentCamera
 						ar.WindUI = aj
 						ar.UIScale = am
 						ar.ElementsModule = al
-						local 
-as, at = ap:New(ar)
+						local as, at = ap:New(ar)
 
 						local av
 						for aw, ax in pairs(at) do
@@ -9383,20 +9424,14 @@ as, at = ap:New(ar)
 			end)
 
 			ae.AddSignal(ap.UIListLayout:GetPropertyChangedSignal("AbsoluteContentSize"), function()
-				ai(
-					ap,
-					0.06,
-					{
-						Size = UDim2.new(
-							1,
-							0,
-							0,
-							math.clamp(ap.UIListLayout.AbsoluteContentSize.Y + (am.Padding * 2), 0, am.MaxHeight)
-						),
-					},
-					Enum.EasingStyle.Quint,
-					Enum.EasingDirection.InOut
-				):Play()
+				ai(ap, 0.06, {
+					Size = UDim2.new(
+						1,
+						0,
+						0,
+						math.clamp(ap.UIListLayout.AbsoluteContentSize.Y + (am.Padding * 2), 0, am.MaxHeight)
+					),
+				}, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut):Play()
 			end)
 
 			function am.Open(as)
@@ -9437,7 +9472,7 @@ as, at = ap:New(ar)
 		local ag = a.load("a")
 		local ai = ag.New
 		ai = function(...)
-			local args = {...}
+			local args = { ... }
 			local suc, res = pcall(ag.New, unpack(args))
 			if not suc then
 				warn(`[Wind GUI Error]: {tostring(res)}`)
@@ -10402,7 +10437,7 @@ as, at = ap:New(ar)
 					Size = UDim2.fromOffset(0, 0),
 					BackgroundTransparency = 1,
 					Parent = Parent,
-					ZIndex = 999
+					ZIndex = 999,
 				}, {
 					ag.NewRoundFrame(aq.UICorner, "SquircleOutline", {
 						Size = UDim2.new(1, 0, 1, 0),
@@ -10412,7 +10447,7 @@ as, at = ap:New(ar)
 					}),
 				})
 				ag.AddThemeObject(Background, { BackgroundColor3 = "Background" })
-			
+
 				local Holder = ag.New("Frame", {
 					Position = UDim2.fromOffset(2, 2),
 					Size = UDim2.new(1, -4, 1, -4),
@@ -10432,7 +10467,7 @@ as, at = ap:New(ar)
 						},
 					}),
 				})
-			
+
 				local Label = ag.New("TextLabel", {
 					Size = UDim2.new(1, 0, 0, 34),
 					Text = Name,
@@ -10450,7 +10485,7 @@ as, at = ap:New(ar)
 						PaddingRight = UDim.new(0, 12),
 					}),
 				})
-			
+
 				local Container = ag.New("Frame", {
 					Position = UDim2.fromOffset(0, 35),
 					Size = UDim2.new(1, 0, 1, -35),
@@ -10467,18 +10502,18 @@ as, at = ap:New(ar)
 						PaddingTop = UDim.new(0, 7),
 					}),
 				})
-		
-				ag.Drag(Background, {Label}, nil)
-			
+
+				ag.Drag(Background, { Label }, nil)
+
 				return Background, Container, Label
 			end
-			
+
 			aq.KeybindFrame, aq.KeybindContainer, aq.KeybindLabel = AddDraggableMenu("Keybinds", aq.UIElements.Main)
 			aq.KeybindFrame.AnchorPoint = Vector2.new(0, 0.5)
 			aq.KeybindFrame.Position = UDim2.new(0, 6, 0.5, 0)
 			aq.KeybindFrame.Visible = false
 			aq.KeybindFrame.AutomaticSize = "Y"
-			
+
 			local closeBtn = ag.New("TextButton", {
 				Size = UDim2.new(0, 20, 0, 20),
 				Position = UDim2.new(1, -12, 0, 7),
@@ -10493,15 +10528,15 @@ as, at = ap:New(ar)
 					CornerRadius = UDim.new(0, 10),
 				}),
 			})
-			
+
 			ag.AddSignal(closeBtn.MouseButton1Click, function()
 				aq.KeybindFrame.Visible = false
 			end)
-			
+
 			--[[aq:CreateTopbarButton("Keybinds", "key", function()
 				aq.KeybindFrame.Visible = not aq.KeybindFrame.Visible
 			end, 996)--]]
-			
+
 			function aq:AddKeybind(name, keybind, callback)
 				local keybindItem = ag.New("Frame", {
 					Size = UDim2.new(1, 0, 0, 20),
@@ -10531,7 +10566,7 @@ as, at = ap:New(ar)
 						},
 					}),
 				})
-			
+
 				ag.AddSignal(keybindItem.TextButton.MouseButton1Click, function()
 					if callback then
 						callback()
@@ -10539,7 +10574,7 @@ as, at = ap:New(ar)
 				end)
 
 				aq.KeybindFrame.Size = UDim2.new(0, 300, 0, aq.KeybindFrame.AbsoluteSize.Y + 18)
-			end		
+			end
 
 			shared.KEYBIND_FRAME_WIND_UI_ADD_KEYBIND_FUNCTION = function(name, keybind, callback)
 				aq:AddKeybind(name, keybind, callback)
@@ -11367,8 +11402,7 @@ if ag then
 end
 
 local ai = a.load("l")
-local aj = 
-ac.Services
+local aj = ac.Services
 
 local ak = ac.Creator
 
@@ -11382,38 +11416,40 @@ local forceRefresh = shared.ForcePlayerGui
 
 local ap = not forceRefresh and protectgui or (syn and syn.protect_gui) or function() end
 
+-- SafeParentUI function similar to Obsidian UI
 local function SafeParentUI(Instance: Instance, Parent: Instance | () -> Instance)
-    local success, _error = pcall(function()
-        if not Parent then
-            Parent = CoreGui
-        end
+	local success, _error = pcall(function()
+		if not Parent then
+			Parent = CoreGui
+		end
 
-        local DestinationParent
-        if typeof(Parent) == "function" then
-            DestinationParent = Parent()
-        else
-            DestinationParent = Parent
-        end
+		local DestinationParent
+		if typeof(Parent) == "function" then
+			DestinationParent = Parent()
+		else
+			DestinationParent = Parent
+		end
 
-        Instance.Parent = DestinationParent
-    end)
+		Instance.Parent = DestinationParent
+	end)
 
-    if not (success and Instance.Parent) then
-        Instance.Parent = Players.LocalPlayer:WaitForChild("PlayerGui", math.huge)
-    end
+	if not (success and Instance.Parent) then
+		Instance.Parent = Players.LocalPlayer:WaitForChild("PlayerGui", math.huge)
+	end
 end
 
 local function ParentUI(UI: Instance, SkipHiddenUI: boolean?)
-    if SkipHiddenUI then
-        SafeParentUI(UI, CoreGui)
-        return
-    end
+	if SkipHiddenUI then
+		SafeParentUI(UI, CoreGui)
+		return
+	end
 
-    pcall(protectgui, UI)
-    SafeParentUI(UI, gethui)
+	pcall(protectgui, UI)
+	SafeParentUI(UI, gethui)
 end
 
-local aq = not forceRefresh and gethui and gethui() or (not forceRefresh and CoreGui or LocalPlayer:WaitForChild("PlayerGui"))
+local aq = not forceRefresh and gethui and gethui()
+	or (not forceRefresh and CoreGui or LocalPlayer:WaitForChild("PlayerGui"))
 
 ac.ScreenGui = al("ScreenGui", {
 	Name = "WindUI",
