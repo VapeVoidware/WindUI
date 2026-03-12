@@ -3140,6 +3140,17 @@ do
 					Button = Color3.fromHex("#5d3a3a"),
 					Icon = Color3.fromHex("#8c6b6b"),
 				},
+				PhantomStorm = {
+					Name = "PhantomStorm",
+					Accent = Color3.fromHex("#7b2fff"),
+					Dialog = Color3.fromHex("#1a0a2e"),
+					Outline = Color3.fromHex("#c084fc"),
+					Text = Color3.fromHex("#f0e6ff"),
+					Placeholder = Color3.fromHex("#a855f7"),
+					Background = Color3.fromHex("#0a0014"),
+					Button = Color3.fromHex("#c026d3"),
+					Icon = Color3.fromHex("#e879f9"),
+				},
 				Sweetheart = {
 					Name = "Sweetheart",
 					Accent = Color3.fromHex("#ff85a1"),
@@ -8478,6 +8489,12 @@ do
 				at.Size = UDim2.new(0, 16, 0, 16)
 				at.ImageLabel.ImageTransparency = not ap.Locked and 0 or 0.7
 				ar = -30
+			end
+
+			function ap.SetTabTitle(au, av)
+				pcall(function()
+					ap.UIElements.Main.Frame.TextLabel.Text = av
+				end)
 			end
 
 			ap.UIElements.ContainerFrame = ai("ScrollingFrame", {
