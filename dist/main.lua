@@ -3129,11 +3129,22 @@ do
 	function z.r()
 		return function(aa)
 			return {
+				Easter = {
+					Name = "Easter",
+					Accent = Color3.fromHex("#f06fbb"),
+					Dialog = Color3.fromHex("#8c2460"),
+					Outline = Color3.fromHex("#fde8f8"),
+					Text = Color3.fromHex("#fde8f8"),
+					Placeholder = Color3.fromHex("#f0a0d5"),
+					Background = Color3.fromHex("#4a1038"),
+					Button = Color3.fromHex("#f06fbb"),
+					Icon = Color3.fromHex("#f8ccea"),
+				},
 				LoveLetter = {
 					Name = "Love Letter",
 					Accent = Color3.fromHex("#e2e2d5"),
 					Dialog = Color3.fromHex("#f5f5dc"),
-					Outline = Color3.fromHex("#704241"),
+					Outline = Color3.fromHex("#977171"),
 					Text = Color3.fromHex("#2d2d2d"),
 					Placeholder = Color3.fromHex("#a68a8a"),
 					Background = Color3.fromHex("#ece0d1"),
@@ -11308,8 +11319,7 @@ local an = al.Tween
 local ao = z.load("p")
 
 local ap = shared.ForcePlayerGui
-local aq = 
-not ap and v or (syn and syn.protect_gui) or function() end
+local aq = not ap and v or (syn and syn.protect_gui) or function() end
 
 local function SafeParentUI(ar: Instance, as: Instance | (() -> Instance))
 	local at = pcall(function()
@@ -11341,8 +11351,7 @@ local function ParentUI(ar: Instance, as: boolean?)
 	pcall(v, ar)
 	SafeParentUI(ar, x)
 end
-local ar = 
-not ap and x and x() or (not ap and b or p:WaitForChild("PlayerGui"))
+local ar = not ap and x and x() or (not ap and b or p:WaitForChild("PlayerGui"))
 
 ac.ScreenGui = am("ScreenGui", {
 	Name = "WindUI",
